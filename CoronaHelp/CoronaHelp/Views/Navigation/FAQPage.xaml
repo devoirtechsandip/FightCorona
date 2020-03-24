@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CoronaHelp.Views.Navigation.FAQPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:CoronaHelp.Controls"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+    x:Name="FAQ"
+    Title="FAQ"
+    BackgroundColor="{DynamicResource Gray-100}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fontawesome:FontAwesomeIcons.Question}" />
+    </ContentPage.IconImageSource>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary Source="Styles.xaml" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform
+            x:TypeArguments="Thickness"
+            Default="0,0,0,0"
+            iOS="0,20,0,0" />
+    </ContentPage.Padding>
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Title view  -->
+            <StackLayout
+                x:Name="TitleView"
+                Grid.Row="0"
+                Padding="16,8"
+                BackgroundColor="{DynamicResource Gray-White}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+
+                <StackLayout
+                    x:Name="Title"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="True"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand">
+
+                    <!--  Back button command  -->
+                    <buttons:SfButton
+                        x:Name="backButton"
+                        Command="{Binding BackButtonCommand}"
+                        CommandParameter="{x:Reference backButton}"
+                        CornerRadius="4"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Back}" />
+
+                    <!--  FAQ page Title  -->
+                    <Label
+                        Margin="16,0"
+                        FontFamily="{StaticResource Montserrat-Medium}"
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        LineHeight="1.25"
+                        Text="FAQs"
+                        TextColor="{DynamicResource Gray-900}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Search"
+                    HorizontalOptions="EndAndExpand"
+                    IsVisible="False"
+                    Orientation="Horizontal"
+                    Spacing="0">
+
+                    <!--  Back to title layout  -->
+                    <buttons:SfButton
+                        x:Name="BackToTitle"
+                        Clicked="BackToTitle_Clicked"
+                        Style="{StaticResource NavigationBarButtonStyle}"
+                        Text="{StaticResource Back}" />
+
+                    <!--  Rounded Search Entry  -->
+                    <border:SfBorder Style="{DynamicResource SfBorderStyle}">
+
+                        <controls:BorderlessEntry
+                            x:Name="SearchEntry"
+                            BindingContext="{x:Reference Questions}"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource SearchEntryStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay}" />
+                    </border:SfBorder>
+
+                </StackLayout>
+
+                <!--  Search Button  -->
+                <buttons:SfButton
+                    x:Name="SearchButton"
+                    Clicked="SearchButton_Clicked"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Search}" />
+
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="1"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="0">
+
+                <!--  Header label Top Questions  -->
+                <Label
+                    Margin="0,24,0,24"
+                    BackgroundColor="{DynamicResource Gray-100}"
+                    FontAttributes="Bold"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="20"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Default=-1,
+                                            Android=1.25}"
+                    Text="Top Questions"
+                    TextColor="{DynamicResource Gray-900}"
+                    VerticalOptions="Center" />
+
+                <controls:SearchableFAQList
+                    x:Name="Questions"
+                    Padding="0"
+                    AutoFitMode="DynamicHeight"
+                    FocusBorderThickness="0"
+                    IsScrollBarVisible="False"
+                    ItemSpacing="0"
+                    ItemsSource="{Binding Questions}"
+                    SearchText="{Binding SearchText}"
+                    SelectionMode="None"
+                    VerticalOptions="FillAndExpand">
+
+                    <!--  View of each card item  -->
+                    <controls:SearchableFAQList.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="{DynamicResource Gray-White}" Spacing="0">
+                                    <syncfusion:SfExpander
+                                        x:Name="expander"
+                                        Margin="16,0"
+                                        HeaderBackgroundColor="{DynamicResource Gray-White}"
+                                        HeaderIconPosition="End"
+                                        IconColor="{DynamicResource Gray-600}">
+
+                                        <!--  Header  -->
+                                        <syncfusion:SfExpander.Header>
+                                            <StackLayout Padding="0,12">
+                                                <!--  Label for Question  -->
+                                                <Label
+                                                    LineBreakMode="NoWrap"
+                                                    Style="{StaticResource FAQHeaderLabelStyle}"
+                                                    Text="{Binding Question}" />
+                                            </StackLayout>
+
+                                        </syncfusion:SfExpander.Header>
+
+                                        <!--  Content  -->
+                                        <syncfusion:SfExpander.Content>
+                                            <StackLayout
+                                                Padding="0,0,0,15"
+                                                BackgroundColor="{DynamicResource Gray-White}"
+                                                BindableLayout.ItemsSource="{Binding Answer}"
+                                                Spacing="8">
+
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <!--  Label for Answers  -->
+                                                        <Label
+                                                            LineHeight="{OnPlatform Default=-1,
+                                                                                    Android=1.25}"
+                                                            Style="{StaticResource FAQLabelStyle}"
+                                                            Text="{Binding}" />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </syncfusion:SfExpander.Content>
+                                    </syncfusion:SfExpander>
+
+                                    <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </controls:SearchableFAQList.ItemTemplate>
+                </controls:SearchableFAQList>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

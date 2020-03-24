@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+    x:Class="CoronaHelp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+    xmlns:themes="clr-namespace:CoronaHelp.Themes;assembly=CoronaHelp">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+            </ResourceDictionary.MergedDictionaries>
+            <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="FontAwesome5Free-Solid" />
+                <On Platform="Android" Value="fa-solid-900.ttf#Solid" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="FontAwesome5Free-Regular" />
+                <On Platform="Android" Value="fa-regular-400.ttf#Regular" />
+            </OnPlatform>
+        </ResourceDictionary>
+
+        <!--  Application resource dictionary  -->
+
+    </Application.Resources>
+</prism:PrismApplication>

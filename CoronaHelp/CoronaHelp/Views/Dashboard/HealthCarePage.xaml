@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CoronaHelp.Views.Dashboard.HealthCarePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:CoronaHelp.Behaviors;assembly=CoronaHelp"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:controls="clr-namespace:CoronaHelp.Controls;assembly=CoronaHelp"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:local="clr-namespace:CoronaHelp.Views.Dashboard"
+    xmlns:viewModel="clr-namespace:CoronaHelp.ViewModels.Dashboard"
+    x:Name="healthCarePage"
+    Title="Global"
+    NavigationPage.HasNavigationBar="False"
+    Style="{StaticResource ContentPageStyle}">
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fontawesome:FontAwesomeIcons.GlobeAsia}" />
+    </ContentPage.IconImageSource>
+
+    <ContentPage.BindingContext>
+        <viewModel:HealthCareViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="rootLayout" Spacing="0">
+
+                <!--  Title View  -->
+                <controls:TitleView
+                    Title="World Data"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16">
+                    <!--<controls:TitleView.LeadingView>
+
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.menuCommand}"
+                            CornerRadius="4"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Menu}" />
+
+                    </controls:TitleView.LeadingView>-->
+
+                    <controls:TitleView.TrailingView>
+
+
+
+
+                        <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            BorderColor="{DynamicResource Gray-White}"
+                            Command="{TemplateBinding BindingContext.DownloadItems}"
+                            CornerRadius="20"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            HeightRequest="40"
+                            Style="{StaticResource ProfileBorderStyle}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Download}"
+                            TextColor="LightSlateGray"
+                            WidthRequest="40" />
+
+
+                    </controls:TitleView.TrailingView>
+                </controls:TitleView>
+
+                <ContentPresenter />
+
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+
+            <StackLayout
+                Margin="0"
+                Padding="8"
+                Spacing="0">
+
+                <listView:SfListView
+                    AutoFitMode="Height"
+                    ItemSpacing="8"
+                    ItemsSource="{Binding CardItems}"
+                    SelectionMode="None">
+
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <cards:SfCardView CornerRadius="8">
+                                <cards:SfCardView.Content>
+                                    <Grid>
+
+                                        <gradient:SfGradientView>
+                                            <gradient:SfGradientView.BackgroundBrush>
+                                                <gradient:SfLinearGradientBrush>
+                                                    <gradient:SfLinearGradientBrush.GradientStops>
+                                                        <gradient:SfGradientStop Offset="0.0" Color="{Binding BackgroundGradientStart}" />
+                                                        <gradient:SfGradientStop Offset="1.0" Color="{Binding BackgroundGradientEnd}" />
+                                                    </gradient:SfLinearGradientBrush.GradientStops>
+                                                </gradient:SfLinearGradientBrush>
+                                            </gradient:SfGradientView.BackgroundBrush>
+                                        </gradient:SfGradientView>
+
+                                        <StackLayout Margin="15" Spacing="5">
+                                            <Label
+                                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                                FontSize="12"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding Category}"
+                                                TextColor="{DynamicResource Gray-White}" />
+                                            <Label
+                                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                                FontSize="22"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding CategoryValue}"
+                                                TextColor="{DynamicResource Gray-White}" />
+                                            <!--<chart:SfChart
+                                                Margin="0,11,0,0"
+                                                BackgroundColor="Transparent"
+                                                HeightRequest="{OnIdiom Phone=44,
+                                                                        Desktop=80,
+                                                                        Tablet=80}"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand">
+                                                <chart:SfChart.PrimaryAxis>
+                                                    <chart:DateTimeAxis
+                                                        IsVisible="False"
+                                                        RangePadding="None"
+                                                        ShowMajorGridLines="False" />
+                                                </chart:SfChart.PrimaryAxis>
+
+                                                <chart:SfChart.SecondaryAxis>
+                                                    <chart:NumericalAxis IsVisible="False" ShowMajorGridLines="False" />
+                                                </chart:SfChart.SecondaryAxis>
+
+                                                <chart:SfChart.Series>
+                                                    <chart:SplineSeries
+                                                        ItemsSource="{Binding ChartData, Mode=TwoWay}"
+                                                        StrokeWidth="2"
+                                                        XBindingPath="XValue"
+                                                        YBindingPath="YValue"
+                                                        Color="{DynamicResource Gray-White}" />
+                                                </chart:SfChart.Series>
+
+                                            </chart:SfChart>-->
+                                        </StackLayout>
+                                    </Grid>
+                                </cards:SfCardView.Content>
+                            </cards:SfCardView>
+
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+
+                    <!--  Layout to customize number of columns in SfListView  -->
+                    <listView:SfListView.LayoutManager>
+                        <listView:GridLayout SpanCount="3" />
+                    </listView:SfListView.LayoutManager>
+
+                    <listView:SfListView.Behaviors>
+                        <behavior:SfListViewExtendHeightBehavior />
+                    </listView:SfListView.Behaviors>
+
+                </listView:SfListView>
+
+                <listView:SfListView
+                    IsScrollingEnabled="False"
+                    ItemSize="80"
+                    ItemSpacing="8"
+                    ItemsSource="{Binding ListCountryData}"
+                    SelectionMode="None">
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <cards:SfCardView
+                                CornerRadius="4"
+                                IndicatorColor="#cf86ff"
+                                IndicatorPosition="Left"
+                                IndicatorThickness="8">
+                                <Grid Padding="16" RowSpacing="4">
+                                    <Label Style="{StaticResource LabelStyle}" Text="{Binding Country}" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Total"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding Cases}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Column="3"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Deaths"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Column="4"
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding Deaths}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Today"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+
+
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Cases"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        FontSize="14"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding TodayCases}" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Deaths"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="4"
+                                        FontSize="14"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding TodayDeaths}" />
+                                </Grid>
+
+                            </cards:SfCardView>
+
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+
+                </listView:SfListView>
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>
