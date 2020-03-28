@@ -9,6 +9,7 @@ using CoronaHelp.ViewModels.Navigation;
 using CoronaHelp.Views.Dashboard;
 using CoronaHelp.ViewModels.Dashboard;
 using CoronaHelp.ViewModels.India;
+using CoronaHelp.ViewModels.Info;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CoronaHelp
@@ -41,6 +42,7 @@ namespace CoronaHelp
 
             containerRegistry.RegisterForNavigation<PrismTabbedPage1, PrismTabbedPage1ViewModel>();
             containerRegistry.RegisterForNavigation<India, IndiaViewModel>();
+            containerRegistry.RegisterForNavigation<Info, InfoViewModel>();
         }
     }
 }

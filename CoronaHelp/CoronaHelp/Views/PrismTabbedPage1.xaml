@@ -13,28 +13,11 @@
     android:TabbedPage.ToolbarPlacement="Bottom"
     prism:ViewModelLocator.AutowireViewModel="True">
     <TabbedPage.Children>
-        <views:HealthCarePage>
-            <!--<views:Depot.Triggers>
-                <Trigger TargetType="ContentPage" Property="IsFocused" Value="False">
-                    <Setter Property="IconImageSource">
-                        <Setter.Value>
-                            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fontawesome:FontAwesomeIcons.Bus}" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <Trigger TargetType="ContentPage" Property="IsFocused" Value="True">
-                    <Setter Property="IconImageSource">
-                        <Setter.Value>
-                            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fontawesome:FontAwesomeIcons.BusAlt}" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </views:Depot.Triggers>-->
-
-        </views:HealthCarePage>
+        <views:HealthCarePage />
+        <views:India />
         <views1:FAQPage />
         <views1:DocumentsListPage />
-        <views:India />
+        <views:Info />
 
     </TabbedPage.Children>
 </TabbedPage>

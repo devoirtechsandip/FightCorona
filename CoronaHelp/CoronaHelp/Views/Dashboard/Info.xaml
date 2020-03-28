@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CoronaHelp.Views.Dashboard.Info"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CoronaHelp.Controls"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Info"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}" Glyph="{x:Static fontawesome:FontAwesomeIcons.InfoCircle}" />
+    </ContentPage.IconImageSource>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="rootLayout" Spacing="0">
+
+                <!--  Title View  -->
+                <controls:TitleView
+                    Title="Information"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16">
+                    <!--<controls:TitleView.LeadingView>
+
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.menuCommand}"
+                            CornerRadius="4"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Menu}" />
+
+                    </controls:TitleView.LeadingView>-->
+
+                    <!--<controls:TitleView.TrailingView>
+
+
+
+
+                        <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            BorderColor="{DynamicResource Gray-White}"
+                            Command="{TemplateBinding BindingContext.DownloadItems}"
+                            CornerRadius="20"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            HeightRequest="40"
+                            Style="{StaticResource ProfileBorderStyle}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Download}"
+                            TextColor="LightSlateGray"
+                            WidthRequest="40" />
+
+
+                    </controls:TitleView.TrailingView>-->
+                </controls:TitleView>
+
+                <ContentPresenter />
+
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+
+            <Grid Padding="5" RowSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="14"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Helpline Number (Toll free)"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="1075"
+                    TextColor="LightSlateGray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TollFreeCall}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="+91-11-23978046"
+                    TextColor="LightSlateGray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PhoneCall}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+                <Label
+                    Grid.Row="2"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="14"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Helpline Email ID"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="ncov2019@gov.in"
+                    TextColor="LightSlateGray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InEmail}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="ncov2019@gmail.com"
+                    TextColor="LightSlateGray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GmailEmail}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Thank you"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Xamarin Forms Team | Syncfusion Team | API - NovelCOVID | WHO | MOHFW"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Developed By"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="Sandip Kumbhar"
+                    TextColor="LightSlateGray" />
+
+                <Label
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontFamily="{StaticResource Montserrat-Medium}"
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="{OnPlatform Android=1.25,
+                                            Default=-1}"
+                    Text="+91-9773-5858-00 | sandip@devoirtech.com | kumbhar.sandip.b@gmail.com"
+                    TextColor="LightSlateGray" />
+
+            </Grid>
+
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

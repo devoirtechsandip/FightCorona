@@ -3,9 +3,15 @@
     x:Class="CoronaHelp.Views.Dashboard.India"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:CoronaHelp.Behaviors"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
     xmlns:controls="clr-namespace:CoronaHelp.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
     xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="India"
     mc:Ignorable="d">
@@ -17,6 +23,52 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--<OnPlatform x:Key="minimumWidth" x:TypeArguments="x:Double">
+                <On Platform="Android,UWP,iOS">
+                    <OnIdiom
+                        x:TypeArguments="x:Double"
+                        Phone="90"
+                        Tablet="20" />
+                </On>
+            </OnPlatform>
+            <OnPlatform x:Key="width" x:TypeArguments="x:Double">
+                <On Platform="Android,UWP,iOS">
+                    <OnIdiom
+                        x:TypeArguments="x:Double"
+                        Desktop="NaN"
+                        Phone="0"
+                        Tablet="NaN" />
+                </On>
+                <On Platform="macOS">
+                    <OnIdiom x:TypeArguments="x:Double" Desktop="NaN" />
+                </On>
+            </OnPlatform>
+            <OnPlatform x:Key="headerText" x:TypeArguments="x:String">
+                <On Platform="Android,UWP,iOS">
+                    <OnIdiom
+                        x:TypeArguments="x:String"
+                        Phone="Product"
+                        Tablet="Product Name" />
+                </On>
+            </OnPlatform>
+            <OnPlatform x:Key="opacity" x:TypeArguments="x:Double">
+                <On Platform="iOS,Android" Value="87" />
+                <On Platform="UWP" Value="80" />
+            </OnPlatform>
+            <OnPlatform x:Key="padding" x:TypeArguments="Thickness">
+                <On Platform="Android,iOS" Value="8, 12, 8, 12" />
+                <On Platform="UWP" Value="8, 12, 8, 16" />
+            </OnPlatform>
+            <OnPlatform x:Key="textSize" x:TypeArguments="x:Double">
+                <On Platform="iOS,UWP" Value="14" />
+                <On Platform="Android" Value="13" />
+            </OnPlatform>
+            <OnPlatform x:Key="font" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Roboto-Regular" />
+                <On Platform="iOS" Value="SFProText-Regular" />
+                <On Platform="UWP" Value="SegoeUI" />
+            </OnPlatform>-->
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,7 +78,7 @@
 
                 <!--  Title View  -->
                 <controls:TitleView
-                    Title="Information"
+                    Title="India Data"
                     FontFamily="{StaticResource Montserrat-Medium}"
                     FontSize="16">
                     <!--<controls:TitleView.LeadingView>
@@ -40,7 +92,7 @@
 
                     </controls:TitleView.LeadingView>-->
 
-                    <!--<controls:TitleView.TrailingView>
+                    <controls:TitleView.TrailingView>
 
 
 
@@ -58,7 +110,7 @@
                             WidthRequest="40" />
 
 
-                    </controls:TitleView.TrailingView>-->
+                    </controls:TitleView.TrailingView>
                 </controls:TitleView>
 
                 <ContentPresenter />
@@ -70,166 +122,264 @@
     <ContentPage.Content>
         <ScrollView>
 
-            <Grid Padding="5" RowSpacing="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+            <StackLayout
+                Margin="0"
+                Padding="8"
+                Spacing="0">
 
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                <listView:SfListView
+                    AutoFitMode="Height"
+                    ItemSpacing="8"
+                    ItemsSource="{Binding CardItems}"
+                    SelectionMode="None">
 
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="14"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Helpline Number (Toll free)"
-                    TextColor="LightSlateGray" />
+                            <cards:SfCardView CornerRadius="8">
+                                <cards:SfCardView.Content>
+                                    <Grid>
 
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="1075"
-                    TextColor="LightSlateGray">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding TollFreeCall}" NumberOfTapsRequired="1" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="+91-11-23978046"
-                    TextColor="LightSlateGray">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PhoneCall}" NumberOfTapsRequired="1" />
-                    </Label.GestureRecognizers>
-                </Label>
+                                        <gradient:SfGradientView>
+                                            <gradient:SfGradientView.BackgroundBrush>
+                                                <gradient:SfLinearGradientBrush>
+                                                    <gradient:SfLinearGradientBrush.GradientStops>
+                                                        <gradient:SfGradientStop Offset="0.0" Color="{Binding BackgroundGradientStart}" />
+                                                        <gradient:SfGradientStop Offset="1.0" Color="{Binding BackgroundGradientEnd}" />
+                                                    </gradient:SfLinearGradientBrush.GradientStops>
+                                                </gradient:SfLinearGradientBrush>
+                                            </gradient:SfGradientView.BackgroundBrush>
+                                        </gradient:SfGradientView>
+
+                                        <StackLayout Margin="15" Spacing="5">
+                                            <Label
+                                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                                FontSize="12"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding Category}"
+                                                TextColor="{DynamicResource Gray-White}" />
+                                            <Label
+                                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                                FontSize="22"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding CategoryValue}"
+                                                TextColor="{DynamicResource Gray-White}" />
+
+                                        </StackLayout>
+                                    </Grid>
+                                </cards:SfCardView.Content>
+                            </cards:SfCardView>
+
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+
+                    <!--  Layout to customize number of columns in SfListView  -->
+                    <listView:SfListView.LayoutManager>
+                        <listView:GridLayout SpanCount="3" />
+                    </listView:SfListView.LayoutManager>
+
+                    <listView:SfListView.Behaviors>
+                        <behavior:SfListViewExtendHeightBehavior />
+                    </listView:SfListView.Behaviors>
+
+                </listView:SfListView>
+
+                <listView:SfListView
+                    IsScrollingEnabled="False"
+                    ItemSize="80"
+                    ItemSpacing="8"
+                    ItemsSource="{Binding ListIndiaData}"
+                    SelectionMode="None">
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <cards:SfCardView
+                                CornerRadius="4"
+                                IndicatorColor="#cf86ff"
+                                IndicatorPosition="Left"
+                                IndicatorThickness="8">
+                                <Grid Padding="16" RowSpacing="4">
+                                    <Label
+                                        Grid.RowSpan="2"
+                                        Grid.ColumnSpan="2"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding loc}" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Indian"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="3"
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding confirmedCasesIndian}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Column="4"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Foreign"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Column="5"
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding confirmedCasesForeign}"
+                                        VerticalOptions="Center" />
+
+                                    <!--<Label
+                                        Grid.Row="1"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Discharged"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />-->
 
 
-                <Label
-                    Grid.Row="2"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="14"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Helpline Email ID"
-                    TextColor="LightSlateGray" />
 
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="ncov2019@gov.in"
-                    TextColor="LightSlateGray">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding InEmail}" NumberOfTapsRequired="1" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="ncov2019@gmail.com"
-                    TextColor="LightSlateGray">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GmailEmail}" NumberOfTapsRequired="1" />
-                    </Label.GestureRecognizers>
-                </Label>
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Recover"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
 
-                <Label
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    HorizontalTextAlignment="Center"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Thank you"
-                    TextColor="LightSlateGray" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        FontSize="14"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding discharged}" />
 
-                <Label
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="14"
-                    HorizontalTextAlignment="Center"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Xamarin Forms Team | Syncfusion Team | API - NovelCOVID | WHO | MOHFW"
-                    TextColor="LightSlateGray" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="4"
+                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                        FontSize="12"
+                                        HorizontalOptions="EndAndExpand"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="Deaths"
+                                        TextColor="{DynamicResource Gray-700}"
+                                        VerticalOptions="Center" />
 
-                <Label
-                    Grid.Row="8"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="16"
-                    HorizontalTextAlignment="Center"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Developed By"
-                    TextColor="LightSlateGray" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="5"
+                                        FontSize="14"
+                                        Style="{StaticResource LabelStyle}"
+                                        Text="{Binding deaths}" />
+                                </Grid>
 
-                <Label
-                    Grid.Row="9"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="14"
-                    HorizontalTextAlignment="Center"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="Sandip Kumbhar"
-                    TextColor="LightSlateGray" />
+                            </cards:SfCardView>
 
-                <Label
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontFamily="{StaticResource Montserrat-Medium}"
-                    FontSize="14"
-                    HorizontalTextAlignment="Center"
-                    LineHeight="{OnPlatform Android=1.25,
-                                            Default=-1}"
-                    Text="+91-9773-5858-00 | sandip@devoirtech.com | kumbhar.sandip.b@gmail.com"
-                    TextColor="LightSlateGray" />
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
 
-            </Grid>
+                </listView:SfListView>
+
+
+                <!--<datagrid:SfDataGrid
+                    AllowSorting="True"
+                    AutoGenerateColumns="false"
+                    ColumnSizer="Star"
+
+                    HeaderRowHeight="52"
+                    ItemsSource="{Binding ListIndiaData}"
+                    RowHeight="48"
+                    SelectionMode="Single"
+                    VerticalOverScrollMode="None">
+
+                    <datagrid:SfDataGrid.SortColumnDescriptions>
+                        <datagrid:SortColumnDescription ColumnName="loc" SortDirection="Descending" />
+                    </datagrid:SfDataGrid.SortColumnDescriptions>
+
+                    <datagrid:SfDataGrid.Columns>
+                        <datagrid:GridTextColumn
+                            Padding="5,0,5,0"
+                            CellTextSize="{StaticResource textSize}"
+                            HeaderCellTextSize="{StaticResource textSize}"
+                            HeaderFontAttribute="Bold"
+                            HeaderText="State"
+                            HeaderTextAlignment="Start"
+                            LineBreakMode="TailTruncation"
+                            MappingName="loc"
+                            MinimumWidth="{StaticResource minimumWidth}"
+                            TextAlignment="End" />
+                        <datagrid:GridTextColumn
+                            Padding="5,0,5,0"
+                            CellTextSize="{StaticResource textSize}"
+                            HeaderCellTextSize="{StaticResource textSize}"
+                            HeaderFontAttribute="Bold"
+                            HeaderText="Indian"
+                            HeaderTextAlignment="Start"
+                            LineBreakMode="TailTruncation"
+                            MappingName="confirmedCasesIndian"
+                            MinimumWidth="{StaticResource minimumWidth}"
+                            TextAlignment="Start" />
+
+                        <datagrid:GridTextColumn
+                            Width="{StaticResource width}"
+                            Padding="5,0,5,0"
+                            CellTextSize="{StaticResource textSize}"
+                            HeaderCellTextSize="{StaticResource textSize}"
+                            HeaderFontAttribute="Bold"
+                            HeaderText="Foreign"
+                            HeaderTextAlignment="Start"
+                            LineBreakMode="TailTruncation"
+                            MappingName="confirmedCasesForeign"
+                            TextAlignment="End" />
+
+                        <datagrid:GridTextColumn
+                            Padding="5,0,5,0"
+                            CellTextSize="{StaticResource textSize}"
+                            HeaderCellTextSize="{StaticResource textSize}"
+                            HeaderFontAttribute="Bold"
+                            HeaderText="Discharged"
+                            HeaderTextAlignment="Start"
+                            LineBreakMode="TailTruncation"
+                            MappingName="discharged"
+                            MinimumWidth="{StaticResource minimumWidth}"
+                            TextAlignment="End" />
+                        <datagrid:GridTextColumn
+                            Padding="5,0,5,0"
+                            CellTextSize="{StaticResource textSize}"
+                            Format="C"
+                            HeaderCellTextSize="{StaticResource textSize}"
+                            HeaderFontAttribute="Bold"
+                            HeaderText="Deaths"
+                            HeaderTextAlignment="Start"
+                            LineBreakMode="TailTruncation"
+                            MappingName="deaths"
+                            MinimumWidth="{StaticResource minimumWidth}"
+                            TextAlignment="End" />
+
+                    </datagrid:SfDataGrid.Columns>
+                </datagrid:SfDataGrid>-->
+
+            </StackLayout>
 
         </ScrollView>
     </ContentPage.Content>
+
+
 </ContentPage>

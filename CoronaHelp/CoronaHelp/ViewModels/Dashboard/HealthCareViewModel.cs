@@ -71,6 +71,8 @@ namespace CoronaHelp.ViewModels.Dashboard
            
             this.MenuCommand = new Command(this.MenuClicked);
             this.DownloadItems = new Command(this.DownloadListFunc);
+            CardItems = new ObservableCollection<HealthCare>();
+            ListCountryData = new ObservableCollection<LstCountryData>();
 
             DownloadListFunc();
             
@@ -218,19 +220,20 @@ namespace CoronaHelp.ViewModels.Dashboard
         private async void DownloadListFunc()
         {
 
-            //await Task.Run(() => { 
-            //    UserDialogs.Instance.ShowLoading("Please wait", MaskType.Black); 
-            //    GetWorldData().ConfigureAwait(false); 
+            //await Task.Run(() =>
+            //{
+            //    UserDialogs.Instance.ShowLoading("Please wait", MaskType.Black);
+            //    GetWorldData().ConfigureAwait(false);
             //    GetCountryData().ConfigureAwait(false);
             //    UserDialogs.Instance.HideLoading();
             //});
 
-          
-                UserDialogs.Instance.ShowLoading("Please wait", MaskType.Black);
-            await GetWorldData().ConfigureAwait(false);
-            await GetCountryData().ConfigureAwait(false);
-                UserDialogs.Instance.HideLoading();
-        
+
+            UserDialogs.Instance.ShowLoading("Please wait", MaskType.Black);
+            await GetWorldData();
+            await GetCountryData();
+            UserDialogs.Instance.HideLoading();
+
 
         }
 
@@ -238,31 +241,32 @@ namespace CoronaHelp.ViewModels.Dashboard
 
         public async Task GetCountryData()
         {
-           
+
 
             var Items = await LoadCountryDataAsync();
 
             if (Items != null)
             {
-                ListCountryData = new ObservableCollection<LstCountryData>();
+                ListCountryData.Clear();
 
-               
-                    foreach (var item in Items)
+
+
+                foreach (var item in Items)
+                {
+                    LstCountryData countryData = new LstCountryData()
                     {
-                        LstCountryData countryData = new LstCountryData()
-                        {
-                            Country = item.Country,
-                            Cases = item.Cases.ToString(),
-                            Deaths = item.Deaths.ToString(),
-                            TodayCases = item.TodayCases.ToString(),
-                            TodayDeaths = item.TodayDeaths.ToString()
-                        };
+                        Country = item.Country,
+                        Cases = item.Cases.ToString(),
+                        Deaths = item.Deaths.ToString(),
+                        TodayCases = item.TodayCases.ToString(),
+                        TodayDeaths = item.TodayDeaths.ToString()
+                    };
 
-                        ListCountryData.Add(countryData);
-                    }
-                
+                    ListCountryData.Add(countryData);
+                }
+
             }
-           
+
         }
 
         public async Task GetWorldData()
@@ -272,32 +276,32 @@ namespace CoronaHelp.ViewModels.Dashboard
 
             if (Items != null)
             {
-                CardItems = new ObservableCollection<HealthCare>(){
-                new HealthCare()
+                CardItems.Clear();
+
+                CardItems.Add(new HealthCare()
                 {
                     Category = "Cases",
                     CategoryValue = Items.cases.ToString(),
                     //ChartData = heartRateData,
                     BackgroundGradientStart = "#f59083",
                     BackgroundGradientEnd = "#fae188",
-                },
-                new HealthCare()
+                });
+                CardItems.Add(new HealthCare()
                 {
                     Category = "Deaths",
                     CategoryValue = Items.deaths.ToString(),
                     //ChartData = caloriesBurnedData,
                     BackgroundGradientStart = "#ff7272",
                     BackgroundGradientEnd = "#f650c5"
-                },
-                new HealthCare()
+                });
+                CardItems.Add(new HealthCare()
                 {
                     Category = "Recovered",
                     CategoryValue = Items.recovered.ToString(),
                     //ChartData = sleepTimeData,
                     BackgroundGradientStart = "#5e7cea",
                     BackgroundGradientEnd = "#1dcce3"
-                }
-                };
+                });          
 
                 
             }

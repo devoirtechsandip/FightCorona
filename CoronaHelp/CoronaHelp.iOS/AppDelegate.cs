@@ -1,3 +1,4 @@
+using Syncfusion.SfDataGrid.XForms.iOS;
 using Syncfusion.XForms.iOS.Cards;
 using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.SfChart.XForms.iOS.Renderers;
@@ -28,7 +29,8 @@ namespace CoronaHelp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+SfDataGridRenderer.Init();
             SfCardViewRenderer.Init();
             SfGradientViewRenderer.Init();
             SfChartRenderer.Init();
